@@ -23,6 +23,8 @@ module.controller("SignInController", function ($scope, $rootScope, $location, e
 
     var loadingEndpoints = endpointManager.loadEndpoints();
 
+
+
     $rootScope.selectedTab = "none";
 
     var generatedMnemonic = new Mnemonic();

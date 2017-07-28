@@ -6,7 +6,10 @@
     <!-- Left column -->
     <div class="col-md-6">
 
-      <select ng-model="fundData">
+      <div>Accout Balance: {{accountBalance | currency }}</div>
+      <br />
+      <select ng-model="fundData" ng-change="updateSharePrice()">
+        <option value="Please Select a Fund to Purchase" disabled="true" selected>Please Select a Fund to Purchase</option>
         <option value="Large-Cap Index Admiral Shares">Large-Cap Index Admiral Shares</option>
         <option value="Morgan Growth">Morgan Growth</option>
         <option value="PRIMECAP Admiral Shares">PRIMECAP Admiral Shares</option>
@@ -32,7 +35,7 @@
         <tr ng-if="fundData === 'PRIMECAP Admiral Shares'">
           <td>{{fundData}}</td>
           <td>VPMAX</td>
-          <td>$212.32</td>
+          <td>$200.31</td>
         </tr>
         <tr ng-if="fundData === 'Total Stock Market Index Admiral Shares'">
           <td>{{fundData}}</td>
@@ -41,12 +44,43 @@
         </tr>
       </table>
 
-      <label for="exampleInputName2" class="col-sm-2 control-label">Quantity</label>
-      <input type="email" class="form-control" id="exampleInputName2" placeholder="Quantity">
+      Quantity: <input ng-model="quantity" type="number" class="form-control" id="inputEmail2" placeholder="Quantity of Shares">
+      <br />
+      <br/>
+      <table class="table" ng-show="fundData">
+        <th colspan="2">Estimated Transaction Detail:</th>
+        <div ng-if="fundData === 'Large-Cap Index Admiral Shares'">
+          <tr>
+            <td>Principal</td>
+            <td>$972.40</td>
+          </tr>
+          <tr>
+            <td>Commission</td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td>Net Amount</td>
+            <td>$972.40</td>
+          </tr>
+        </div>
+        <!---->
+          <!--<td>Principal</td>-->
+          <!--<td>{{principal}}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>Commission</td>-->
+          <!--<td>Free</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>Net Amount</td>-->
+          <!--<td ng-model="netAmount"></td>-->
+        <!--</tr>-->
+      </table>
 
-      <!--<div class="panel panel-default">-->
-        <!--<div class="list-group">-->
-          <!---->
+      <button>Submit</button>
+      <div class="panel panel-default">
+        <div class="list-group">
+
           <!--<div class="list-group-item section-header" ng-repeat-start="endpoint in balance">-->
             <!--<h3 class="panel-title">{{ endpoint.endpoint.properties.name }} <span ng-hide="endpoint.endpoint.properties.name">({{ endpoint.endpoint.rootUrl }})</span></h3>-->
           <!--</div>-->
@@ -64,7 +98,9 @@
           <!-- Asset Items -->
           <!--<a asset-item href="" class="list-group-item clearfix" ng-click="sendAsset(asset)" ng-repeat="asset in endpoint.assets" ng-show="endpoint.state == 'loaded'">-->
 
-          </a>
+
+
+          <!--</a>-->
 
           <div class="list-group-item list-message" ng-show="endpoint.state == 'loaded' && endpoint.assets.length == 0" ng-repeat-end>
             <i class="fa fa-info-circle fa-lg"></i> You don't have any asset

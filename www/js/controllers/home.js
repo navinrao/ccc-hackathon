@@ -25,7 +25,6 @@ module.controller("HomeController", function ($scope, $rootScope, controllerServ
         return;
 
     $rootScope.selectedTab = "home";
-
     $scope.rootAccount = walletSettings.rootAccount.toString();
     $scope.rawAddress = walletSettings.derivedKey.privateKey.toAddress().toString();
     $scope.endpoints = endpointManager.endpoints;
@@ -36,6 +35,27 @@ module.controller("HomeController", function ($scope, $rootScope, controllerServ
         "routeTo": "",
         "memo": ""
     };
+    $scope.accountBalance = 10000;
+
+    $scope.updateSharePrice = function() {
+        console.log("called");
+        if ($scope.fundData =='Large-Cap Index Admiral Shares')
+            $scope.sharePrice = 97.24;
+
+        else if ($scope.fundData =='Morgan Growth')
+            $scope.sharePrice = 212.32;
+
+        else if ($scope.fundData =='PRIMECAP Admiral Shares')
+            $scope.sharePrice = 200.31;
+
+        else if ($scope.fundData =='Total Stock Market Index Admiral Shares')
+            $scope.sharePrice = 45.98;
+
+        $scope.principal = $scope.sharePrice * $scope.quantity;
+        Console.log($scope.sharePrice);
+        $scope.netAmount = $scope.principal;
+    };
+
 
     // Load all assets in the account
     var balance = [];
